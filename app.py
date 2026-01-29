@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Configurare stil pagină
-st.set_page_config(page_title="BacLogos - Ion", page_icon="📚")
+st.set_page_config(page_title="George-Bac - Ion", page_icon="📚")
 
 # --- CSS Personalizat pentru aspect Premium ---
 st.markdown("""
@@ -13,7 +13,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # --- SIDEBAR (Meniul de navigare) ---
-st.sidebar.title("🚀 BacLogos v1.0")
+st.sidebar.title("🚀 George-Bac v1.0")
 st.sidebar.info("Pregătire Premium pentru Bacalaureat")
 
 menu = st.sidebar.radio("Navigare", ["🏠 Acasă", "📖 Ion - L. Rebreanu", "💎 Abonament Pro"])
@@ -91,4 +91,5 @@ elif menu == "💎 Abonament Pro":
     st.write("- ✅ Eseuri detaliate (500+ cuvinte)")
     st.write("- ✅ Scheme logice pentru memorare rapidă")
     st.write("- ✅ Suport AI 24/7 pentru întrebări")
+
     st.button("Plătește prin Stripe")
