@@ -1,132 +1,83 @@
-import streamlit as st
+elif current_page == "Ion":
+    # Buton de navigare înapoi
+    if st.button("⬅️ Înapoi la Bibliotecă"):
+        st.session_state.page = "📚 Biblioteca de Opere"
+        st.rerun()
+        
+    st.title("📖 Ion – Liviu Rebreanu")
+    st.markdown("### *Primul roman realist-obiectiv din literatura română (1920)*")
 
-# --- CONFIGURARE PAGINĂ ---
-st.set_page_config(page_title="George-Bac", page_icon="⚡", layout="wide")
+    # Layout pe coloane: Stânga (Eseu), Dreapta (Interactivitate)
+    col_eseu, col_interactiv = st.columns([2, 1])
 
-# --- DESIGN PREMIUM (CSS AVANSAT) ---
-st.markdown("""
-    <style>
-    /* Fundalul general */
-    .stApp {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    }
-    
-    /* Cardurile pentru Eseu */
-    .stExpander {
-        background-color: rgba(255, 255, 255, 0.8) !important;
-        border-radius: 15px !important;
-        border: none !important;
-        box-shadow: 0px 4px 15px rgba(0,0,0,0.05);
-        margin-bottom: 10px;
-    }
-    
-    /* Butoanele de acțiune */
-    div.stButton > button {
-        background: linear-gradient(90deg, #FF512F 0%, #DD2476 100%);
-        color: white;
-        border: none;
-        padding: 15px 30px;
-        border-radius: 50px;
-        font-weight: bold;
-        transition: 0.3s;
-        box-shadow: 0px 4px 10px rgba(221, 36, 118, 0.3);
-    }
-    
-    div.stButton > button:hover {
-        transform: scale(1.05);
-        box-shadow: 0px 6px 15px rgba(221, 36, 118, 0.4);
-    }
-    
-    /* Caseta de Scor */
-    .score-card {
-        background: white;
-        padding: 20px;
-        border-radius: 20px;
-        text-align: center;
-        border-bottom: 5px solid #FF512F;
-        box-shadow: 0px 10px 20px rgba(0,0,0,0.05);
-    }
-    
-    /* Titluri cu gradient */
-    .main-title {
-        font-family: 'Helvetica Neue', sans-serif;
-        background: -webkit-linear-gradient(#333, #666);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 3em;
-        font-weight: 800;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    with col_eseu:
+        # --- SECȚIUNEA 1: ÎNCADRARE (GRATUITĂ) ---
+        with st.expander("📌 1. Încadrarea în curent și context", expanded=True):
+            st.write("""
+            **Context:** Publicat în **1920**, romanul deschide drumul modernizării literaturii române prin obiectivitate.
+            
+            **Trăsături Realiste:**
+            * **Obiectivitatea naratorului:** Narator omniscient, omniprezent, care relatează detașat, „dindărăt” (viziune focalizată zero).
+            * **Verosimilitatea:** Acțiunea este plasată în satul Pripas, o imagine fidelă a societății ardelene de la începutul secolului XX.
+            * **Personajul tipic:** Ion este țăranul sărac a cărui demnitate depinde de posesia pământului.
+            """)
 
-# --- LOGICĂ SCOR ---
-if 'score' not in st.session_state:
-    st.session_state.score = 0
+        # --- VERIFICARE ABONAMENT PENTRU SECȚIUNILE 2 ȘI 3 ---
+        if st.session_state.get('subscribed', False):
+            # --- SECȚIUNEA 2: TEMA ȘI EPISOADELE ---
+            with st.expander("🎭 2. Tema și două episoade reprezentative", expanded=True):
+                st.markdown("#### **Tema: Lupta pentru pământ și iubirea neîmplinită.**")
+                
+                st.info("**Episodul 1: Hora de duminică.**")
+                st.write("""
+                Scena de început a romanului fixează ierarhia socială. Ion o alege la joc pe Ana, fata bogătașului Vasile Baciu, 
+                deși o iubește pe Florica. Acest moment reprezintă declanșarea conflictului interior dintre 'glasul pământului' 
+                și 'glasul iubirii'.
+                """)
+                
+                st.info("**Episodul 2: Sărutarea pământului.**")
+                st.write("""
+                După obținerea pământurilor prin căsătoria cu Ana, Ion îngenunchează la câmp într-un gest de posesiune cvasi-religios. 
+                *„Îl sărută cu patimă, ca pe o amantă”*. Această scenă subliniază obsesia sa și victoria (temporară) asupra condiției sociale.
+                """)
 
-# --- SIDEBAR DESIGN ---
-with st.sidebar:
-    cod_secret = st.text_input("Cod Admin", type="password")
-    if cod_secret == "george123": # Poți pune orice parolă vrei
-        st.session_state.subscribed = True
-        st.success("Mod Admin Activat!")
-with st.sidebar:
-    st.markdown("<h1 style='text-align: center;'>⚡ George-Bac</h1>", unsafe_allow_html=True)
-    st.markdown(f"""
-        <div class="score-card">
-            <span style="font-size: 0.9em; color: #666;">Puncte Acumulate</span><br>
-            <span style="font-size: 2.5em; font-weight: bold; color: #FF512F;">{st.session_state.score}</span>
-        </div>
-    """, unsafe_allow_html=True)
-    st.markdown("---")
-    menu = st.radio("Meniu principal", ["🏠 Acasă", "📚 Biblioteca de Opere", "🏆 Clasament", "💎 Upgrade PRO"])
+            # --- SECȚIUNEA 3: ELEMENTE DE STRUCTURĂ ---
+            with st.expander("🏗️ 3. Elemente de structură și limbaj", expanded=True):
+                st.write("""
+                * **Structura circulară:** Romanul începe și se termină cu imaginea drumului care intră și iese din satul Pripas.
+                * **Compoziția:** Două părți simetrice: **'Glasul pământului'** și **'Glasul iubirii'**, urmărind decăderea morală a lui Ion.
+                * **Conflictele:** - *Exterior:* Ion vs. Vasile Baciu (avere) și Ion vs. George Bulbuc (rivalitate erotică).
+                    - *Interior:* Lupta între dorința de ascensiune socială și fericirea sufletească.
+                """)
+        else:
+            # PAYWALL PENTRU UTILIZATORII NEPLĂTITORI
+            st.markdown("""
+                <div style="background-color: white; padding: 20px; border-radius: 10px; border: 2px dashed #FF512F; text-align: center;">
+                    <h4>🔒 Conținut Blocat</h4>
+                    <p>Pentru a vedea eseu complet (Tema, Episoadele și Structura), activează abonamentul <b>PRO</b> sau introdu codul de Admin.</p>
+                </div>
+            """, unsafe_allow_html=True)
 
-# --- PAGINA ACASĂ ---
-if menu == "🏠 Acasă":
-    st.markdown("<h1 class='main-title'>Pregătit să iei 10?</h1>", unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    with col1:
+    with col_interactiv:
+        st.markdown("### 🏆 Antrenament")
+        st.write("Câștigă puncte pentru scorul tău!")
+        
+        # QUIZ 1
+        q1 = st.radio("Cine este personajul care îl ucide pe Ion?", ["Vasile Baciu", "George Bulbuc", "Preotul Belciug"], index=None)
+        if st.button("Verifică Răspuns"):
+            if q1 == "George Bulbuc":
+                st.success("Corect! +20 Puncte")
+                st.session_state.score += 20
+                st.balloons()
+            else:
+                st.error("Incorect! -5 Puncte")
+                st.session_state.score -= 5
+
+        st.markdown("---")
+        # SCHEMA VIZUALA A RELAȚIILOR
+        st.write("🔍 **Relații Personaje:**")
         st.markdown("""
-        ### De ce George-Bac?
-        * **Nu tocești:** Înveți prin jocuri și scheme logice.
-        * **Structură fixă:** Exact ce cer corectorii la examen.
-        * **Puncte George:** Adună puncte și deblochează premii.
+        - **Ion ↔ Ana:** Căsătorie din interes (Pământ).
+        - **Ion ↔ Florica:** Iubire pătimașă (Regret).
+        - **Ion ↔ Vasile Baciu:** Conflict social brutal.
         """)
-        if st.button("🚀 Începe cu prima operă"):
-            st.info("Alege 'Biblioteca de Opere' din stânga!")
-    with col2:
-        st.image("https://cdn-icons-png.flaticon.com/512/3407/3407154.png", width=200)
-
-# --- PAGINA BIBLIOTECĂ (Exemplu Ion) ---
-elif menu == "📚 Biblioteca de Opere":
-    st.title("📚 Biblioteca George-Bac")
-    
-    # Grid de opere
-    col_ion, col_scrisoarea, col_baltagul = st.columns(3)
-    
-    with col_ion:
-        st.subheader("Ion")
-        st.caption("Liviu Rebreanu")
-        if st.button("Studiază Ion"):
-            st.session_state.current_page = "Ion"
-            st.rerun()
-
-    # (Aici urmează restul de opere în aceleași format)
-
-# --- PAGINA UPGRADE ---
-elif menu == "💎 Upgrade PRO":
-    st.markdown("<h1 style='text-align: center;'>Deblochează tot potențialul 💎</h1>", unsafe_allow_html=True)
-    st.markdown("""
-    <div style="background: white; padding: 30px; border-radius: 20px; text-align: center;">
-        <h2>Abonament Full Access</h2>
-        <p style="font-size: 1.5em; color: #FF512F;"><b>49 RON / lună</b></p>
-        <ul style="text-align: left; display: inline-block;">
-            <li>✅ Toate cele 17 eseuri detaliate</li>
-            <li>✅ 50+ Jocuri interactive de memorare</li>
-            <li>✅ Modele de Subiectul I și II rezolvate</li>
-            <li>✅ Audio-Books pentru fiecare eseu</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    st.button("VREAU PRO ACUM")
-
