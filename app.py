@@ -1,116 +1,129 @@
 import streamlit as st
 
-# --- 1. CONFIGURARE PAGINĂ ---
-st.set_page_config(page_title="George-Bac", page_icon="⚡", layout="wide")
+# --- 1. CONFIGURARE ---
+st.set_page_config(page_title="George-Bac Premium", page_icon="📚", layout="wide")
 
-# --- 2. INITIALIZARE VARIABILE (SESSION STATE) ---
-if 'score' not in st.session_state:
-    st.session_state.score = 0
-if 'subscribed' not in st.session_state:
-    st.session_state.subscribed = False
-if 'page' not in st.session_state:
-    st.session_state.page = "🏠 Acasă"
+if 'score' not in st.session_state: st.session_state.score = 0
+if 'subscribed' not in st.session_state: st.session_state.subscribed = False
+if 'page' not in st.session_state: st.session_state.page = "🏠 Acasă"
 
-# --- 3. DESIGN PREMIUM (CSS) ---
+# --- 2. DESIGN ---
 st.markdown("""
     <style>
-    .stApp { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
-    .stExpander { background-color: white !important; border-radius: 15px !important; box-shadow: 0px 4px 15px rgba(0,0,0,0.05); border: none !important; margin-bottom: 10px; }
-    div.stButton > button { 
-        background: linear-gradient(90deg, #FF512F 0%, #DD2476 100%); 
-        color: white; border-radius: 50px; font-weight: bold; border: none; transition: 0.3s; width: 100%;
-    }
-    .score-card { background: white; padding: 20px; border-radius: 20px; text-align: center; border-bottom: 5px solid #FF512F; box-shadow: 0px 10px 20px rgba(0,0,0,0.05); }
+    .stApp { background: #f8f9fa; }
+    .eseu-text { font-size: 1.1em; line-height: 1.6; color: #1a1a1a; background: white; padding: 20px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
+    .highlight { color: #FF512F; font-weight: bold; }
+    div.stButton > button { width: 100%; border-radius: 20px; font-weight: bold; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- 4. SIDEBAR (NAVIGARE & ADMIN) ---
+# --- 3. SIDEBAR ---
 with st.sidebar:
-    st.markdown("<h1 style='text-align: center;'>⚡ George-Bac</h1>", unsafe_allow_html=True)
-    st.markdown(f"""<div class="score-card">
-            <span style="color: #666;">Puncte George</span><br>
-            <span style="font-size: 2.5em; font-weight: bold; color: #FF512F;">{st.session_state.score}</span>
-        </div>""", unsafe_allow_html=True)
-    st.markdown("---")
+    st.title("⚡ George-Bac")
+    st.metric("Scorul tău ⭐", st.session_state.score)
+    menu = st.radio("Navigare", ["🏠 Acasă", "📚 Biblioteca", "💎 Upgrade PRO"])
+    if st.session_state.page not in ["Ion"]: st.session_state.page = menu
     
-    # Navigare
-    menu_selection = st.radio("Meniu principal", ["🏠 Acasă", "📚 Biblioteca de Opere", "🏆 Clasament", "💎 Upgrade PRO"])
-    
-    # Sincronizare automată cu meniul, mai puțin când suntem în interiorul unei opere
-    if st.session_state.page not in ["Ion"]:
-        st.session_state.page = menu_selection
-
-    st.markdown("---")
-    # AICI ERA EROAREA (Linia 49 fixată):
-    cod_admin = st.text_input("🔓 Cod Admin", type="password")
-    if cod_admin == "george123":
+    st.write("---")
+    cod = st.text_input("🔓 Cod Admin", type="password")
+    if cod == "george123":
         st.session_state.subscribed = True
-        st.success("Mod Admin: ACTIVAT")
+        st.success("Acces TOTAL activat!")
 
-# --- 5. LOGICA DE PAGINI ---
-
+# --- 4. PAGINI ---
 if st.session_state.page == "🏠 Acasă":
-    st.title("Pregătit să iei 10 la Bac? 🚀")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.write("Învață literatura prin joc și logică, nu prin memorare mecanică.")
-        if st.button("Deschide Biblioteca"):
-            st.session_state.page = "📚 Biblioteca de Opere"
-            st.rerun()
-    with col2:
-        st.image("https://cdn-icons-png.flaticon.com/512/3407/3407154.png", width=200)
+    st.title("Pregătit de BAC?")
+    st.write("Alege o operă din bibliotecă pentru a vedea eseul complet și jocurile.")
+    if st.button("Mergi la Bibliotecă"):
+        st.session_state.page = "📚 Biblioteca"
+        st.rerun()
 
-elif st.session_state.page == "📚 Biblioteca de Opere":
-    st.title("📚 Biblioteca George-Bac")
-    col_ion, col_baltag, col_scrisoarea = st.columns(3)
-    with col_ion:
+elif st.session_state.page == "📚 Biblioteca":
+    st.title("📚 Opere Disponibile")
+    c1, c2 = st.columns(2)
+    with c1:
         st.subheader("Ion")
-        st.caption("Liviu Rebreanu")
-        if st.button("Studiază Ion"):
+        st.write("Liviu Rebreanu")
+        if st.button("DESCHIDE ION"):
             st.session_state.page = "Ion"
             st.rerun()
-    with col_baltag:
-        st.subheader("Baltagul")
-        st.caption("Mihail Sadoveanu")
-        st.button("În curând...", disabled=True)
 
 elif st.session_state.page == "Ion":
-    if st.button("⬅️ Înapoi la Bibliotecă"):
-        st.session_state.page = "📚 Biblioteca de Opere"
+    if st.button("⬅️ Înapoi"):
+        st.session_state.page = "📚 Biblioteca"
         st.rerun()
+
+    st.title("📖 Ion - Liviu Rebreanu (Eseu Complet)")
     
-    st.title("📖 Ion – Liviu Rebreanu")
-    col_eseu, col_quiz = st.columns([2, 1])
+    t1, t2 = st.tabs(["📄 Eseu Detaliat", "🎮 Jocuri Interactive"])
 
-    with col_eseu:
-        with st.expander("📌 1. Încadrare și Context", expanded=True):
-            st.write("Roman realist-obiectiv din 1920. Narator omniscient, perspectivă 'dindărăt'.")
+    with t1:
+        # --- ESEUL COMPLET (500+ CUVINTE) ---
+        st.markdown("""
+        <div class="eseu-text">
+        <h3>1. Încadrarea în context și curent</h3>
+        Publicat în <b>1920</b>, romanul <i>"Ion"</i> de Liviu Rebreanu este primul roman realist-obiectiv din literatura română. 
+        Este un roman de tip <b>doric</b>, ce prezintă viața satului ardelean de la începutul secolului XX într-o manieră veridică. 
+        Obiectivitatea este susținută de naratorul omniscient și omniprezent, care nu intervine în destinul personajelor.
+        <br><br>
+        <h3>2. Tema și viziunea despre lume</h3>
+        Tema centrală este <b>lupta pentru pământ</b> într-o societate rurală unde averea condiționează respectul comunității. 
+        Viziunea despre lume este una dură, naturalistă, unde instinctele domină rațiunea.
+        <br><br>
+        <p class="highlight">Episodul cheie: Hora.</p>
+        Acțiunea începe duminica, la horă, unde observăm stratificarea socială: primarul și bogații stau separat, în timp ce Ion, 
+        un "sărăntoc", o alege pe Ana pentru pământ, deși inima îi aparține Floricăi.
+        <br><br>
+        <p class="highlight">Episodul cheie: Sărutarea pământului.</p>
+        După ce intră în posesia averii lui Vasile Baciu, Ion merge la câmp și îngenunchează. Gestul său simbolic 
+        reprezintă victoria instinctului de posesie. "Îl sărută cu patimă, ca pe o amantă", marcând o legătură cvasi-religioasă cu glia.
+        </div>
+        """, unsafe_allow_html=True)
         
-        if st.session_state.subscribed:
-            with st.expander("🎭 2. Tema și Episoadele", expanded=True):
-                st.write("**Tema:** Pământul și Iubirea. Episoade: Hora și Sărutarea pământului.")
-            with st.expander("🏗️ 3. Structură", expanded=True):
-                st.write("**Circularitate:** Drumul de la început și final încadrează satul Pripas.")
-                
+        if not st.session_state.subscribed:
+            st.error("Restul eseului (Caracterizarea și Structura) este blocat. Folosește codul Admin!")
         else:
-            st.info("🔒 Secțiunile 2 și 3 sunt blocate pentru PRO.")
+            st.markdown("""
+            <div class="eseu-text">
+            <h3>3. Elemente de structură</h3>
+            Romanul are o <b>structură circulară</b>, simetria fiind dată de imaginea drumului care intră și iese din satul Pripas. 
+            Este împărțit în două volume: <i>"Glasul pământului"</i> și <i>"Glasul iubirii"</i>, titluri ce reflectă 
+            conflictul interior al protagonistului. 
+            <br><br>
+            <b>Conflictul exterior</b> se poartă între Ion și Vasile Baciu pentru pământ, iar cel interior între dorința 
+            de avere și iubirea pentru Florica. Finalul tragic, uciderea lui Ion de către George Bulbuc, 
+            închide destinul personajului sub semnul fatalității.
+            </div>
+            """, unsafe_allow_html=True)
 
-    with col_quiz:
-        st.subheader("🏆 Quiz")
-        raspuns = st.radio("Cine e rivalul lui Ion?", ["Vasile Baciu", "George Bulbuc", "Florica"], index=None)
-        if st.button("Verifică"):
-            if raspuns == "George Bulbuc":
-                st.success("Corect! +20 puncte"); st.session_state.score += 20
-            else:
-                st.error("Greșit!"); st.session_state.score = max(0, st.session_state.score - 5)
+    with t2:
+        if not st.session_state.subscribed:
+            st.warning("Jocurile sunt disponibile doar pentru membrii PRO / Admin!")
+        else:
+            st.header("🕹️ Centrul de Antrenament")
+            
+            # JOC 1: SORTARE LOGICĂ
+            st.subheader("1. Ordinea evenimentelor")
+            ordine = st.multiselect("Pune scenele în ordinea corectă:", 
+                ["Moartea lui Ion", "Hora în sat", "Sărutarea pământului", "Nunta cu Ana"])
+            if st.button("Verifică Ordinea"):
+                if ordine == ["Hora în sat", "Nunta cu Ana", "Sărutarea pământului", "Moartea lui Ion"]:
+                    st.success("Bravo! +50 puncte"); st.session_state.score += 50
+                else: st.error("Mai încearcă!")
 
-elif st.session_state.page == "🏆 Clasament":
-    st.title("🏆 Clasament")
-    st.table({"Elev": ["Andrei", "Elena", "Tu"], "Scor": [500, 420, st.session_state.score]})
+            # JOC 2: IDENTIFICĂ CITATUL
+            st.write("---")
+            st.subheader("2. Cine a spus?")
+            citat = st.radio("'Norocul e pentru cine-l caută...'", ["Ion", "Vasile Baciu", "Titu Herdelea"])
+            if st.button("Verifică Citat"):
+                if citat == "Ion":
+                    st.success("Corect! +20 puncte"); st.session_state.score += 20
+                else: st.error("Greșit!")
 
-elif st.session_state.page == "💎 Upgrade PRO":
-    st.title("💎 George-Bac PRO")
-    if st.button("Activează varianta completă"):
-        st.session_state.subscribed = True
-        st.balloons()
-        st.rerun()
+            # JOC 3: ASOCIERE PERSONAJE
+            st.write("---")
+            st.subheader("3. Potrivește destinul")
+            destin = st.selectbox("Ce se întâmplă cu Ana?", ["Se mărită cu George", "Se sinucide", "Fuge cu Ion la oraș"])
+            if st.button("Verifică Destin"):
+                if destin == "Se sinucide":
+                    st.success("E trist, dar corect. +30 puncte"); st.session_state.score += 30
