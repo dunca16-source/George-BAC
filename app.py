@@ -71,4 +71,70 @@ if st.session_state.page == "Ion":
                 an = st.selectbox("În ce an a apărut Ion?", ["1900", "1920", "1945"])
                 curent = st.selectbox("În ce curent literar se încadrează?", ["Realism", "Romantism", "Modernism"])
                 if st.button("Verifică Nivel 1"):
-                    if an == "1
+                    if an == "1920" and curent == "Realism": st.success("Corect! +10 pct"); st.session_state.score += 10
+            
+            with st.expander("2. Identificarea Temei"):
+                tema = st.radio("Care este tema principală a operei?", ["Războiul", "Lupta pentru pământ", "Condiția intelectualului"])
+                if st.button("Verifică Nivel 2"):
+                    if tema == "Lupta pentru pământ": st.success("Corect! +10 pct"); st.session_state.score += 10
+
+            with st.expander("3. Caracteristici Realiste"):
+                er = st.multiselect("Alege elementele realiste prezente:", ["Perspectivă obiectivă", "Final fericit", "Tehnica detaliului", "Personaje fantastice"])
+                if st.button("Verifică Nivel 3"):
+                    if set(er) == {"Perspectivă obiectivă", "Tehnica detaliului"}: st.success("Corect! +20 pct"); st.session_state.score += 20
+
+            with st.expander("4. Arhitectura Romanului"):
+                structura = st.selectbox("Cum este structura romanului?", ["Circulară", "Liniară", "Hachurată"])
+                if st.button("Verifică Nivel 4"):
+                    if structura == "Circulară": st.success("Corect! +10 pct"); st.session_state.score += 10
+
+            with st.expander("5. Cele două volume"):
+                vol = st.multiselect("Care sunt titlurile celor două volume?", ["Glasul iubirii", "Glasul sângelui", "Glasul pământului", "Glasul datoriei"])
+                if st.button("Verifică Nivel 5"):
+                    if set(vol) == {"Glasul iubirii", "Glasul pământului"}: st.success("Corect! +20 pct"); st.session_state.score += 20
+
+            with st.expander("6. Simbolul Drumului"):
+                drum = st.radio("Ce sugerează descrierea drumului de la început?", ["O eroare geografică", "Intrarea în universul ficțiunii", "Graba naratorului"])
+                if st.button("Verifică Nivel 6"):
+                    if "ficțiunii" in drum: st.success("Corect! +15 pct"); st.session_state.score += 15
+
+            with st.expander("7. Conflictul principal"):
+                rival = st.selectbox("Cine este rivalul principal al lui Ion pentru Florica?", ["Vasile Baciu", "George Bulbuc", "Titu Herdelea"])
+                if st.button("Verifică Nivel 7"):
+                    if rival == "George Bulbuc": st.success("Corect! +10 pct"); st.session_state.score += 10
+
+            # --- NIVEL 8 REPARAT ---
+            with st.expander("8. Analiză de text (Citat)", expanded=True):
+                st.write("'Îl sărută cu patimă, ca pe o ...'")
+                # Folosim key pentru a preveni bug-urile de refresh
+                r8 = st.text_input("Scrie cuvântul lipsă aici:", key="q8_input")
+                if st.button("Verifică Nivel 8"):
+                    # Curățăm răspunsul de spații și litere mari
+                    if r8.lower().strip() in ["amantă", "amanta"]:
+                        st.success("BRAVO! Ai reținut citatul critic corect. +25 pct")
+                        st.session_state.score += 25
+                    else:
+                        st.error("Incorect. Gândește-te la cum îl vede Ion pământul (ca pe o femeie iubită).")
+
+            with st.expander("9. Destinul Anei"):
+                ana = st.radio("Ce se întâmplă cu Ana în final?", ["Pleacă la oraș", "Se sinucide", "Se recăsătorește"])
+                if st.button("Verifică Nivel 9"):
+                    if ana == "Se sinucide": st.success("Corect! +15 pct"); st.session_state.score += 15
+
+            with st.expander("10. Deznodământul"):
+                final = st.radio("Cum moare protagonistul?", ["Bătrân și bogat", "Ucis de George cu sapa", "Accident"])
+                if st.button("Verifică Nivel 10"):
+                    if "George" in final:
+                        st.balloons()
+                        st.success("FELICITĂRI! Maraton Ion completat! +30 pct")
+                        st.session_state.score += 30
+
+elif st.session_state.page == "📚 Biblioteca":
+    st.title("📚 Bibliotecă")
+    if st.button("📖 Ion - Liviu Rebreanu"):
+        st.session_state.page = "Ion"; st.rerun()
+
+elif st.session_state.page == "🏠 Acasă":
+    st.title("George-Bac ⚡")
+    if st.button("Deschide Biblioteca"):
+        st.session_state.page = "📚 Biblioteca"; st.rerun()
