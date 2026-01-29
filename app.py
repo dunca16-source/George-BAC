@@ -65,6 +65,11 @@ if 'score' not in st.session_state:
 
 # --- SIDEBAR DESIGN ---
 with st.sidebar:
+    cod_secret = st.text_input("Cod Admin", type="password")
+    if cod_secret == "george123": # Poți pune orice parolă vrei
+        st.session_state.subscribed = True
+        st.success("Mod Admin Activat!")
+with st.sidebar:
     st.markdown("<h1 style='text-align: center;'>⚡ George-Bac</h1>", unsafe_allow_html=True)
     st.markdown(f"""
         <div class="score-card">
@@ -124,3 +129,4 @@ elif menu == "💎 Upgrade PRO":
     </div>
     """, unsafe_allow_html=True)
     st.button("VREAU PRO ACUM")
+
