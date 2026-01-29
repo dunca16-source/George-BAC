@@ -1,118 +1,115 @@
 import streamlit as st
 
-# --- 1. CONFIGURARE ---
+# --- CONFIGURARE ---
 st.set_page_config(page_title="George-Bac Premium", page_icon="📚", layout="wide")
 
 if 'score' not in st.session_state: st.session_state.score = 0
 if 'subscribed' not in st.session_state: st.session_state.subscribed = False
 if 'page' not in st.session_state: st.session_state.page = "🏠 Acasă"
 
-# --- 2. DESIGN ---
+# --- DESIGN ---
 st.markdown("""
     <style>
-    .stApp { background: #f8f9fa; }
-    .eseu-text { font-size: 1.15em; line-height: 1.7; color: #1a1a1a; background: white; padding: 30px; border-radius: 15px; box-shadow: 5px 5px 20px rgba(0,0,0,0.05); text-align: justify; }
-    .highlight { color: #FF512F; font-weight: bold; font-style: italic; }
-    .titlu-sectiune { color: #2c3e50; border-bottom: 2px solid #FF512F; padding-bottom: 5px; margin-top: 20px; }
-    div.stButton > button { width: 100%; border-radius: 20px; font-weight: bold; background: linear-gradient(90deg, #FF512F, #DD2476); color: white; border: none; }
+    .stApp { background: #fdfdfd; }
+    .eseu-text { 
+        font-size: 1.2em; 
+        line-height: 1.8; 
+        color: #2c3e50; 
+        background: white; 
+        padding: 40px; 
+        border-radius: 20px; 
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.08); 
+        text-align: justify;
+        border-left: 5px solid #FF512F;
+    }
+    .highlight { color: #FF512F; font-weight: bold; }
+    .citat { font-style: italic; color: #555; background: #fff5f2; padding: 10px; border-left: 3px solid #FF512F; display: block; margin: 15px 0; }
+    .titlu-sectiune { color: #1a1a1a; font-family: 'Georgia', serif; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 30px; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- 3. SIDEBAR ---
+# --- SIDEBAR ---
 with st.sidebar:
     st.title("⚡ George-Bac")
-    st.metric("Scorul tău ⭐", st.session_state.score)
+    st.metric("Puncte Acumulate ⭐", st.session_state.score)
     menu = st.radio("Navigare", ["🏠 Acasă", "📚 Biblioteca", "💎 Upgrade PRO"])
     if st.session_state.page not in ["Ion"]: st.session_state.page = menu
-    
     st.write("---")
     cod = st.text_input("🔓 Cod Admin", type="password")
     if cod == "george123":
         st.session_state.subscribed = True
         st.success("Acces TOTAL activat!")
 
-# --- 4. PAGINI ---
-if st.session_state.page == "🏠 Acasă":
-    st.title("Pregătit de BAC? 🚀")
-    st.write("Aici găsești eseurile complete de 500+ cuvinte și jocurile care te ajută să reții structura operei.")
-    if st.button("Mergi la Bibliotecă"):
-        st.session_state.page = "📚 Biblioteca"
-        st.rerun()
-
-elif st.session_state.page == "📚 Biblioteca":
-    st.title("📚 Opere Disponibile")
-    c1, c2 = st.columns(2)
-    with c1:
-        st.subheader("Ion")
-        st.caption("Liviu Rebreanu")
-        if st.button("DESCHIDE ION - ESEU COMPLET"):
-            st.session_state.page = "Ion"
-            st.rerun()
-
-elif st.session_state.page == "Ion":
+# --- PAGINA ION ---
+if st.session_state.page == "Ion":
     if st.button("⬅️ Înapoi la Bibliotecă"):
-        st.session_state.page = "📚 Biblioteca"
-        st.rerun()
+        st.session_state.page = "📚 Biblioteca"; st.rerun()
 
-    st.title("📖 Ion - Liviu Rebreanu (Eseu Varianta Lungă)")
+    st.title("📖 Ion de Liviu Rebreanu – Analiză Completă")
     
-    t1, t2 = st.tabs(["📄 Eseu Detaliat (500+ cuvinte)", "🎮 Jocuri Interactive"])
+    t1, t2 = st.tabs(["📄 Eseu Detaliat (Subiectul III)", "🎮 Jocuri & Teste"])
 
     with t1:
         st.markdown('<div class="eseu-text">', unsafe_allow_html=True)
         
-        st.markdown('<h3 class="titlu-sectiune">1. Încadrarea în context și curent</h3>', unsafe_allow_html=True)
+        st.markdown('<h2 class="titlu-sectiune">I. Introducere și Încadrare</h2>', unsafe_allow_html=True)
         st.write("""
-        Publicat în anul **1920**, romanul <span class="highlight">"Ion"</span> de Liviu Rebreanu constituie un moment de cotitură în literatura română, fiind primul roman realist-obiectiv de valoare europeană. Acesta aparține perioadei interbelice și ilustrează perfect trăsăturile realismului: perspectiva narativă obiectivă, tehnica detaliului semnificativ și caracterul verosimil al acțiunii. 
-        
-        Naratorul este **omniscient și omniprezent**, adoptând o viziune "dindărăt", ceea ce conferă textului un caracter impersonal. Această detașare narativă îi permite cititorului să observe mecanismele sociale și psihologice care duc la degradarea morală a personajelor, fără ca autorul să intervină cu judecăți de valoare.
+        Publicat în **1920**, romanul <span class="highlight">"Ion"</span> de Liviu Rebreanu reprezintă un pilon fundamental al literaturii române interbelice, fiind considerat primul roman realist-obiectiv de amploare. 
+        Opera este o monografie a satului ardelean de la începutul secolului al XX-lea, construită pe principiile realismului critic. 
+        Naratorul este **omniprezent și omniscient**, relatând evenimentele la persoana a III-a dintr-o perspectivă detașată, neutră, ce conferă textului o autoritate aproape istorică. 
+        Structura este una circulară, simetria fiind oferită de imaginea drumului care „vine” și „pleacă” din satul Pripas, sugerând că viața comunității își continuă cursul imperturbabil, indiferent de tragediile individuale.
         """)
 
-        st.markdown('<h3 class="titlu-sectiune">2. Tema și viziunea despre lume</h3>', unsafe_allow_html=True)
+        st.markdown('<h2 class="titlu-sectiune">II. Tema și Viziunea despre Lume</h2>', unsafe_allow_html=True)
         st.write("""
-        Tema centrală a operei este **destinul țăranului român** din Ardeal la începutul secolului al XX-lea, pentru care posesia pământului reprezintă singura cale de a obține demnitatea socială. Viziunea despre lume este una aspră, dominată de determinism social și biologic: într-o lume în care "pământul e totul", instinctele primare de supraviețuire și de mărire devin mai puternice decât legile morale.
-        
-        Un prim episod reprezentativ este cel al **horei**, scena de început a romanului. Aici este prezentată, în miniatură, întreaga structură socială a satului Pripas. Stratificarea este evidentă: bogații satului (fruntașii) stau separat de sărăntoci, iar preotul Belciug și învățătorul Herdelea reprezintă intelectualitatea satului. Ion, un tânăr harnic, dar sărac, o alege la joc pe Ana, fata bogătașului Vasile Baciu. Această alegere nu este întâmplătoare, ci reprezintă primul pas dintr-un plan bine calculat de a obține pământ, deși Ion este atras fizic și sufletește de Florica, o fată frumoasă, dar lipsită de zestre.
+        Tema centrală este **lupta pentru pământ** într-o societate rurală în care posesia averii condiționează statutul social și demnitatea umană. 
+        Eugen Lovinescu îl definea pe Ion drept o „brută ingenioasă”, a cărei existență este sfâșiată între două forțe opuse, simbolizate prin titlurile celor două volume: **„Glasul pământului”** și **„Glasul iubirii”**. 
+        Viziunea despre lume a autorului este una aspră, marcată de determinism: personajul nu este doar o victimă a societății bântuite de lăcomie, ci și a propriilor instincte primare care îl dezumanizează treptat.
         """)
 
+        # --- SECTIUNE BLOCATA ---
         if not st.session_state.subscribed:
-            st.warning("Restul eseului (Sărutarea pământului, Analiza personajului, Structura și Finalul) este blocat. Folosește codul Admin!")
+            st.warning("⚠️ Restul eseului (încă 400 de cuvinte) și analiza scenelor cheie sunt disponibile doar pentru membrii PRO.")
         else:
+            st.markdown('<h2 class="titlu-sectiune">III. Secvențe Reprezentative</h2>', unsafe_allow_html=True)
             st.write("""
-            Un al doilea episod fundamental este cel al **sărutării pământului**. După ce Ion reușește să-l forțeze pe Vasile Baciu să-i cedeze toate pământurile, protagonistul merge la câmp într-o dimineață de primăvară. Gestul său de a îngenunchea și de a săruta glia este descris într-un limbaj ritualic: <span class="highlight">"Îl sărută cu patimă, ca pe o amantă"</span>. Pământul încetează să mai fie un obiect de producție, devenind o forță cosmică, o divinitate în fața căreia Ion se simte acum "mare și puternic". Totuși, acest moment marchează și dezumanizarea sa totală: pentru pământ, Ion a sacrificat viața Anei și propriul echilibru interior.
+            Un prim episod fundamental este cel al **horei de duminică**. Această scenă de început nu este doar un eveniment social, ci o „hartă” a ierarhiilor din Pripas. 
+            Aici, Ion o alege la joc pe Ana, fata bogătașului Vasile Baciu, deși o iubește pe Florica. Această decizie marchează debutul conflictului: Ion sacrifică sentimentul pur pentru dorința de ascensiune socială. 
+            Vasile Baciu îl numește „sărăntoc”, moment în care Ion înțelege că fără pământ nu este nimic în ochii satului.
+            <br><br>
+            A doua secvență esențială, punctul culminant al „Glasului pământului”, este **sărutarea pământului**. După ce Ion obține prin vicleșug averile lui Vasile Baciu, acesta merge la câmp într-o zi de primăvară. 
+            Gestul său depășește sfera economică, devenind un act cvasi-mistic. 
+            <span class="citat">„Îl sărută cu patimă, ca pe o amantă. Şi abia acum pământul i se păru frumos...”</span> 
+            Această imagine este simbolul dezumanizării: Ion a înlocuit iubirea pentru o femeie (Florica/Ana) cu o obsesie materială personificată. Pământul nu mai este o resursă, ci o stăpână care îi devorează sufletul.
             """)
-
-            st.markdown('<h3 class="titlu-sectiune">3. Elemente de structură și compoziție</h3>', unsafe_allow_html=True)
-            st.write("""
-            Romanul se remarcă printr-o **structură circulară**, bazată pe simetrie. Imaginea drumului care intră în satul Pripas la începutul cărții și drumul care părăsește satul în final, trecând pe lângă crucea strâmbă de la marginea localității, sugerează indiferența lumii față de dramele individuale. Totul trece, viața merge înainte, iar moartea lui Ion nu schimbă cu nimic rânduiala satului.
             
-            Compozițional, textul este împărțit în două volume cu titluri metaforice: **"Glasul pământului"** (dorința de avere) și **"Glasul iubirii"** (regretul pentru Florica). Cele două voci luptă continuu în sufletul protagonistului. Conflictul exterior este dat de lupta dintre Ion și Vasile Baciu, doi bărbați la fel de încăpățânați, în timp ce conflictul interior este drama omului care nu poate împăca instinctul de posesiune cu nevoia de fericire.
+            
+
+            st.markdown('<h2 class="titlu-sectiune">IV. Elemente de Structură și Conflict</h2>', unsafe_allow_html=True)
+            st.write("""
+            Romanul este organizat în **13 capitole** cu titluri sugestive (Blestemul, Ștreangul, Iubirea etc.), grupate în două părți simetrice. 
+            Conflictul exterior este triplu: **social** (lupta pentru pământ între Ion și Vasile Baciu), **național** (problema românilor din Transilvania sub stăpânire austro-ungară) și **erotic** (rivalitatea dintre Ion și George Bulbuc). 
+            Însă cel mai puternic rămâne **conflictul interior**, dat de imposibilitatea lui Ion de a împăca cele două „glasuri”. 
+            După ce obține pământul, „Glasul iubirii” revine cu o forță distructivă, împingându-l spre Florica și, implicit, spre finalul său tragic sub loviturile de sapă ale lui George.
             """)
 
-            st.markdown('<h3 class="titlu-sectiune">4. Concluzie</h3>', unsafe_allow_html=True)
+            st.markdown('<h2 class="titlu-sectiune">V. Concluzie</h2>', unsafe_allow_html=True)
             st.write("""
-            În concluzie, prin <span class="highlight">"Ion"</span>, Liviu Rebreanu creează un personaj monumental, o "brută ingenioasă" (E. Lovinescu), care eșuează din cauza propriei lăcomii. Opera rămâne o capodoperă a realismului prin rigoarea construcției și prin profunzimea analizei sociale, fiind un reper obligatoriu în literatura română.
+            În concluzie, <span class="highlight">"Ion"</span> rămâne o capodoperă a realismului critic prin profunzimea analizei psihologice și prin rigoarea construcției. 
+            Destinul protagonistului este o lecție despre limitele lăcomiei și despre modul în care instinctele necontrolate pot duce la prăbușirea morală și biologică a individului.
             """)
         
         st.markdown('</div>', unsafe_allow_html=True)
 
     with t2:
         if not st.session_state.subscribed:
-            st.warning("Jocurile sunt disponibile doar pentru membrii PRO / Admin!")
+            st.error("🔒 Secțiunea de jocuri este blocată.")
         else:
-            st.header("🕹️ Centrul de Antrenament")
-            st.subheader("1. Quiz de logică - Subiectul III")
-            # Adăugăm jocuri care verifică exact ce s-a scris mai sus
-            q_structura = st.radio("Ce tip de structură are romanul Ion?", ["Liniară", "Circulară", "Fragmentară"])
-            if st.button("Verifică Structura"):
-                if q_structura == "Circulară":
-                    st.success("Corect! Simetria este dată de imaginea drumului."); st.session_state.score += 20
-                else: st.error("Incorect! Recitește secțiunea 3.")
-            
-            st.write("---")
-            st.subheader("2. Esența personajului")
-            atribute = st.multiselect("Alege trăsăturile lui Ion:", ["Harnic", "Lacom", "Romantic", "Violent", "Generos"])
-            if st.button("Verifică Trăsături"):
-                if set(atribute) == {"Harnic", "Lacom", "Violent"}:
-                    st.success("Excelent! Acestea sunt trăsăturile realiste."); st.session_state.score += 30
-                else: st.warning("Ion nu este nici romantic, nici generos.")
+            st.subheader("🎮 Antrenament pentru Subiectul III")
+            # JOCUL DE CITATE
+            st.write("Cine este personajul care reprezintă 'Glasul Iubirii'?")
+            q1 = st.selectbox("Alege varianta:", ["Ana", "Florica", "Savista"], index=None)
+            if st.button("Verifică"):
+                if q1 == "Florica":
+                    st.success("Corect! +20 puncte"); st.session_state.score += 20
+                else: st.error("Incorect!")
