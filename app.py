@@ -35,7 +35,7 @@ if st.session_state.page == "Ion":
 
     st.title("📖 Ion - Liviu Rebreanu (Analiză Completă & Maraton 10 Jocuri)")
     
-    t1, t2 = st.tabs(["📄 Eseu Detaliat (500+ cuvinte)", "🎮 Maratonul de Jocuri (10 Nivele)"])
+    t1, t2 = st.tabs(["📄 Eseu Detaliat (500+ cuvinte)", "🎮 Maratonul de Jocuri (10 Niveluri)"])
 
     with t1:
         # --- ESEUL COMPLET ȘI NESCHIMBAT (doar cuvântul corectat) ---
@@ -136,3 +136,4 @@ elif st.session_state.page == "🏠 Acasă":
     st.title("George-Bac ⚡")
     if st.button("Deschide Biblioteca"):
         st.session_state.page = "📚 Biblioteca"; st.rerun()
+
