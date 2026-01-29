@@ -38,25 +38,34 @@ if st.session_state.page == "Ion":
     t1, t2 = st.tabs(["📄 Eseu Detaliat (500+ cuvinte)", "🎮 Maratonul de Jocuri (10 Niveluri)"])
 
     with t1:
-        # --- ESEUL COMPLET ȘI NESCHIMBAT (doar cuvântul corectat) ---
+        # I. Introducere
         st.markdown('<div class="titlu-sectiune">I. Introducere și Încadrare în Context</div>', unsafe_allow_html=True)
-        st.markdown('<div class="text-eseu">Publicat în anul <b>1920</b>, romanul <span class="highlight">"Ion"</span> de Liviu Rebreanu reprezintă un moment de cotitură în literatura română, fiind considerat primul roman realist-obiectiv de valoare europeană. Acesta aparține perioadei interbelice și ilustrează perfect trăsăturile realismului. Tehnica detaliului semnificativ și caracterul verosimil al acțiunii sunt elemente  care incadreaza acest roman in realism. Acest univers ficțional reușește să creeze iluzia vieții. Este descris cu fidelitate satul ardelean. Situațiile de viață relatate dau impresia implicării într-o lume vie și cunoscută. Scena horei, în care se detaliază jocul tradițional, respectiv redarea obiceiurilor de nuntă și înmormântare, îi conferă textului un caracter monografic. '
+        st.markdown('<div class="text-eseu">Publicat în anul <b>1920</b>, romanul <span class="highlight">"Ion"</span> de Liviu Rebreanu reprezintă un moment de cotitură în literatura română, fiind considerat primul roman realist-obiectiv de valoare europeană. Acesta aparține perioadei interbelice și ilustrează perfect trăsăturile realismului. Tehnica detaliului semnificativ și caracterul verosimil al acțiunii sunt elemente care incadreaza acest roman in realism. Acest univers ficțional reușește să creeze iluzia vieții. Este descris cu fidelitate satul ardelean. Situațiile de viață relatate dau impresia implicării într-o lume vie și cunoscută. Scena horei, în care se detaliază jocul tradițional, respectiv redarea obiceiurilor de nuntă și înmormântare, îi conferă textului un caracter monografic.</div>', unsafe_allow_html=True)
+        
+        # II. Tema
         st.markdown('<div class="titlu-sectiune">II. Tema și Viziunea despre Lume</div>', unsafe_allow_html=True)
         st.markdown('<div class="text-eseu">Tema centrală a operei este <b>destinul țăranului român</b> din Ardeal la începutul secolului al XX-lea, pentru care posesia pământului reprezintă singura cale de a obține demnitatea socială. Viziunea despre lume este una aspră, dominată de determinism social și biologic: într-o lume în care „pământul e totul”, instinctele primare de supraviețuire și de mărire devin mai puternice decât legile morale. Eugen Lovinescu îl definea pe Ion drept o „brută ingenioasă”, a cărei existență este sfâșiată între două forțe opuse, simbolizate prin titlurile celor două volume: <b>„Glasul pământului”</b> și <b>„Glasul iubirii”</b>.</div>', unsafe_allow_html=True)
 
         if not st.session_state.subscribed:
             st.warning("🔒 Secțiunile III, IV și V sunt blocate. Introdu codul Admin!")
         else:
+            # III. Secvente
             st.markdown('<div class="titlu-sectiune">III. Secvențe Reprezentative – Analiză Aprofundată</div>', unsafe_allow_html=True)
             st.markdown('<div class="text-eseu">Un prim episod reprezentativ este cel al <b>horei</b>, scena de început a romanului. Aici este prezentată, în miniatură, întreaga structură socială a satului Pripas. Stratificarea este evidentă: bogații satului stau separat de „sărăntoci”, iar preotul Belciug și învățătorul Herdelea reprezintă intelectualitatea. Ion o alege la joc pe Ana, fata bogătașului Vasile Baciu, reprezentând primul pas dintr-un plan calculat de a obține pământ, deși inima îi aparține Floricăi.</div>', unsafe_allow_html=True)
+            
+            
             
             st.markdown('<div class="text-eseu">Un al doilea episod fundamental este cel al <b>sărutării pământului</b>. După ce Ion reușește să-l forțeze pe Vasile Baciu să-i cedeze pământurile, protagonistul merge la câmp într-o dimineață de primăvară. Gestul său de a îngenunchea și de a săruta glia este descris într-un limbaj ritualic:</div>', unsafe_allow_html=True)
             st.markdown('<span class="citat">„Se aplecă şi-şi lipi buzele cu voluptate de pământul ud. Şi în sărutarea aceasta pătimaşă simţi un fior rece, ameţitor... Îl sărută cu patimă, ca pe o <b>ibovnică</b>. Şi abia acum pământul i se păru frumos, cu iarbă moale, proaspătă.”</span>', unsafe_allow_html=True)
             st.markdown('<div class="text-eseu">Această imagine este simbolul dezumanizării: Ion a înlocuit iubirea umană cu o obsesie materială personificată. Pământul încetează să mai fie un obiect, devenind o divinitate în fața căreia Ion se simte „mare și puternic”.</div>', unsafe_allow_html=True)
 
+            # IV. Structura
             st.markdown('<div class="titlu-sectiune">IV. Elemente de Structură și Compoziție</div>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">Perspectiva narativă obiectivă, naratorul este <b>omniscient și omniprezent</b>, adoptând o viziune „dindărăt'. Romanul se remarcă printr-o <b>structură circulară</b>, bazată pe simetrie. Imaginea drumului care intră în satul Pripas la începutul cărții și drumul care părăsește satul în final, trecând pe lângă crucea strâmbă, sugerează indiferența lumii față de dramele individuale. Compozițional, textul este împărțit în cele două volume menționate anterior, care reflectă conflictul interior dintre dorința de avere și nevoia de fericire. Conflictul exterior este dat de lupta dintre Ion și Vasile Baciu, în timp ce finalul tragic, uciderea lui Ion de către George Bulbuc, închide destinul personajului sub semnul fatalității.</div>', unsafe_allow_html=True)'
+            st.markdown('<div class="text-eseu">Perspectiva narativă obiectivă, naratorul este <b>omniscient și omniprezent</b>, adoptând o viziune „dindărăt”. Romanul se remarcă printr-o <b>structură circulară</b>, bazată pe simetrie. Imaginea drumului care intră în satul Pripas la începutul cărții și drumul care părăsește satul în final, trecând pe lângă crucea strâmbă, sugerează indiferența lumii față de dramele individuale. Compozițional, textul este împărțit în cele două volume menționate anterior, care reflectă conflictul interior dintre dorința de avere și nevoia de fericire. Conflictul exterior este dat de lupta dintre Ion și Vasile Baciu, în timp ce finalul tragic, uciderea lui Ion de către George Bulbuc, închide destinul personajului sub semnul fatalității.</div>', unsafe_allow_html=True)
             
+            
+            
+            # V. Concluzie
             st.markdown('<div class="titlu-sectiune">V. Concluzie</div>', unsafe_allow_html=True)
             st.markdown('<div class="text-eseu">În concluzie, prin <span class="highlight">"Ion"</span>, Liviu Rebreanu creează un personaj monumental care eșuează din cauza propriei lăcomii. Opera rămâne o capodoperă a realismului prin rigoarea construcției și prin profunzimea analizei sociale, fiind un reper obligatoriu în literatura română care demonstrează că ignorarea laturii spirituale duce inevitabil la prăbușire.</div>', unsafe_allow_html=True)
 
@@ -102,7 +111,6 @@ if st.session_state.page == "Ion":
                 if st.button("Verifică Nivel 7"):
                     if rival == "George Bulbuc": st.success("Correct! +10 pct"); st.session_state.score += 10
 
-            # --- NIVEL 8 REPARAT CU IBOVNICĂ ---
             with st.expander("8. Analiză de text (Citat)", expanded=True):
                 st.write("'Îl sărută cu patimă, ca pe o ...'")
                 r8 = st.text_input("Scrie cuvântul lipsă aici:", key="q8_input")
@@ -135,9 +143,3 @@ elif st.session_state.page == "🏠 Acasă":
     st.title("George-Bac ⚡")
     if st.button("Deschide Biblioteca"):
         st.session_state.page = "📚 Biblioteca"; st.rerun()
-
-
-
-
-
-
