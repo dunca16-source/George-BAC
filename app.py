@@ -1,44 +1,45 @@
 import streamlit as st
 
 # --- 1. CONFIGURARE ---
-st.set_page_config(page_title="George-Bac Premium", page_icon="📚", layout="wide")
+st.set_page_config(page_title="George-Bac Premium", page_icon="⚡", layout="wide")
 
 if 'score' not in st.session_state: st.session_state.score = 0
 if 'subscribed' not in st.session_state: st.session_state.subscribed = False
 if 'page' not in st.session_state: st.session_state.page = "🏠 Acasă"
 
-# --- 2. DESIGN (CSS) ---
+# --- 2. DESIGN ---
 st.markdown("""
     <style>
     .highlight { color: #FF512F; font-weight: bold; }
-    .citat { font-style: italic; color: #444; background: #fff5f2; padding: 20px; border-left: 5px solid #FF512F; display: block; margin: 20px 0; border-radius: 8px; line-height: 1.6; }
-    .titlu-sectiune { color: #1a1a1a; font-family: 'serif'; border-bottom: 2px solid #FF512F; padding-bottom: 8px; margin-top: 35px; font-weight: bold; font-size: 1.6em; }
+    .citat { font-style: italic; color: #444; background: #fff5f2; padding: 20px; border-left: 5px solid #FF512F; display: block; margin: 20px 0; border-radius: 8px; }
+    .titlu-sectiune { color: #1a1a1a; border-bottom: 2px solid #FF512F; padding-bottom: 8px; margin-top: 35px; font-weight: bold; font-size: 1.6em; }
     .text-eseu { font-size: 1.15em; line-height: 1.8; text-align: justify; color: #2c3e50; }
+    .quiz-container { background: #f8f9fa; padding: 20px; border-radius: 15px; border: 1px solid #eee; margin-bottom: 20px; }
     </style>
     """, unsafe_allow_html=True)
 
 # --- 3. SIDEBAR ---
 with st.sidebar:
     st.title("⚡ George-Bac")
-    st.metric("Scor", st.session_state.score)
+    st.metric("Puncte George ⭐", st.session_state.score)
     menu = st.radio("Meniu", ["🏠 Acasă", "📚 Biblioteca", "💎 Upgrade PRO"])
     if st.session_state.page not in ["Ion"]: st.session_state.page = menu
     st.write("---")
     if st.text_input("🔓 Cod Admin", type="password") == "george123":
         st.session_state.subscribed = True
-        st.success("Acces PRO deblocat!")
+        st.success("Acces TOTAL deblocat!")
 
 # --- 4. LOGICA PAGINI ---
 if st.session_state.page == "🏠 Acasă":
-    st.title("Pregătire Premium Bacalaureat 🚀")
-    st.write("Eseuri dezvoltate conform baremului și exerciții interactive.")
+    st.title("George-Bac: Platforma Ta de Nota 10 🚀")
+    st.write("Învață literatura prin logică și jocuri, nu prin memorare.")
     if st.button("Deschide Biblioteca"):
         st.session_state.page = "📚 Biblioteca"
         st.rerun()
 
 elif st.session_state.page == "📚 Biblioteca":
-    st.title("📚 Opere Studiate")
-    if st.button("Ion - Liviu Rebreanu"):
+    st.title("📚 Biblioteca de Opere")
+    if st.button("📖 Ion - Liviu Rebreanu"):
         st.session_state.page = "Ion"
         st.rerun()
 
@@ -46,46 +47,97 @@ elif st.session_state.page == "Ion":
     if st.button("⬅️ Înapoi"):
         st.session_state.page = "📚 Biblioteca"; st.rerun()
 
-    st.title("📖 Ion de Liviu Rebreanu – Analiză Critică Detaliată")
+    st.title("📖 Ion - Liviu Rebreanu (Eseu & 10 Jocuri)")
     
-    t1, t2 = st.tabs(["📄 Eseu Complet (Subiectul III)", "🎮 Jocuri de Fixare"])
+    t1, t2 = st.tabs(["📄 Eseu Complet", "🎮 Maratonul de Jocuri (10)"])
 
     with t1:
-        # SECȚIUNEA I
-        st.markdown('<div class="titlu-sectiune">I. Introducere și Contextualizare</div>', unsafe_allow_html=True)
-        st.markdown('<div class="text-eseu">Apărut în anul <b>1920</b>, romanul <span class="highlight">"Ion"</span> reprezintă prima mare capodoperă a lui Liviu Rebreanu și fundamentul romanului realist-obiectiv în literatura română. Opera este un roman de tip <b>doric</b>, ce oferă o imagine panoramică asupra satului ardelean de la începutul secolului al XX-lea. Autorul înlocuiește idilizarea specifică sămănătorismului cu o viziune crudă, naturalistă, asupra realității rurale, unde pământul nu este doar o resursă, ci o condiție a demnității umane.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="titlu-sectiune">I. Introducere și Context</div>', unsafe_allow_html=True)
+        st.markdown('<div class="text-eseu">Apărut în anul <b>1920</b>, romanul <span class="highlight">"Ion"</span> reprezintă prima mare capodoperă a lui Liviu Rebreanu și fundamentul romanului realist-obiectiv. Opera oferă o imagine panoramică asupra satului ardelean, unde pământul reprezintă condiția demnității umane.</div>', unsafe_allow_html=True)
         
-        # SECȚIUNEA II
-        st.markdown('<div class="titlu-sectiune">II. Tema și Viziunea despre Lume</div>', unsafe_allow_html=True)
-        st.markdown('<div class="text-eseu">Tema centrală a romanului este <b>lupta pentru pământ</b>, dublată de tema destinului și a iubirii neîmplinite. Viziunea despre lume este marcată de un determinism social și biologic: într-o lume în care „pământul e totul”, personajele sunt marionete ale propriilor instincte. Perspectiva narativă este <b>obiectivă</b>, naratorul fiind un „mic demiurg” omniscient și omniprezent, care relatează detașat, fără a interveni în evoluția personajelor, respectând principiul verosimilității specifice realismului.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="titlu-sectiune">II. Tema și Viziunea</div>', unsafe_allow_html=True)
+        st.markdown('<div class="text-eseu">Tema centrală este <b>lupta pentru pământ</b>, dublată de tema destinului. Viziunea este marcată de un determinism social: personajele sunt marionete ale propriilor instincte. Perspectiva narativă este <b>obiectivă</b>, naratorul fiind un „mic demiurg” omniscient.</div>', unsafe_allow_html=True)
 
         if st.session_state.subscribed:
-            # SECȚIUNEA III - DEZVOLTATĂ
-            st.markdown('<div class="titlu-sectiune">III. Secvențe Reprezentative – Analiză Aprofundată</div>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">Prima scenă definitorie este <b>„Hora în sat”</b>, care funcționează ca o „harta” sociologică a localității Pripas. Ierarhia socială este prezentată prin așezarea personajelor: bogații (fruntașii) stau separat, discutând treburi politice, în timp ce tinerii joacă sub privirile vigilente ale bătrânilor. Alegerea lui Ion de a juca cu Ana, deși o iubește pe Florica, nu este un gest spontan, ci debutul unui plan premeditat. Jignirea adusă de Vasile Baciu, care îl numește pe Ion „sărăntoc”, declanșează conflictul principal, rănind orgoliul protagonistului și împingându-l spre dezumanizare.</div>', unsafe_allow_html=True)
+            st.markdown('<div class="titlu-sectiune">III. Secvențe Reprezentative</div>', unsafe_allow_html=True)
+            st.markdown('<div class="text-eseu">Scena <b>horei</b> prezintă ierarhia satului, în timp ce <b>sărutarea pământului</b> simbolizează posesia totală și dezumanizarea.</div>', unsafe_allow_html=True)
+            st.markdown('<span class="citat">„Îl sărută cu patimă, ca pe o amantă. Şi abia acum pământul i se păru frumos...”</span>', unsafe_allow_html=True)
             
-            
-
-            st.markdown('<div class="text-eseu">Cea mai celebră secvență este cea a <b>sărutării pământului</b>. Aceasta reprezintă momentul de apogeu al „Glasului pământului”. Ion, ajuns în posesia gliei prin forțarea Anei la sinucidere morală, merge pe câmp și îndeplinește un gest ritualic de o intensitate aproape mistică.</div>', unsafe_allow_html=True)
-            st.markdown('<span class="citat">„Se aplecă şi-şi lipi buzele cu voluptate de pământul ud. Şi în sărutarea aceasta pătimaşă simţi un fior rece, ameţitor... Îl sărută cu patimă, ca pe o amantă. Şi abia acum pământul i se păru frumos, cu iarbă moale, proaspătă.”</span>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">Această scenă subliniază caracterul <b>naturalist</b> al operei: pământul este personificat, devenind o forță feminină posesivă care îl înghite pe individ. Gestul lui Ion nu este unul de recunoștință, ci unul de stăpânire brutală, care anunță însă moartea sa iminentă.</div>', unsafe_allow_html=True)
-
-            # SECȚIUNEA IV - DEZVOLTATĂ
-            st.markdown('<div class="titlu-sectiune">IV. Elemente de Structură și Compoziție</div>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">Romanul are o <b>structură circulară</b>, simetria fiind dată de descrierea drumului de la începutul și finalul operei. La început, drumul „vine” spre Pripas, invitând cititorul în universul ficțiunii, iar la final „se pierde” în șoseaua mare, sugerând indiferența cosmică a universului față de tragismul mărunt al oamenilor. Compoziția este marcată de cele două volume, <b>„Glasul pământului”</b> și <b>„Glasul iubirii”</b>, care reflectă dualitatea sufletească a lui Ion. Conflictul interior este dat de lupta dintre dorința de ascensiune socială și nevoia de împlinire erotică, un conflict pe care Ion nu îl poate rezolva decât prin moarte.</div>', unsafe_allow_html=True)
-
-            # SECȚIUNEA V - CONCLUZIE
-            st.markdown('<div class="titlu-sectiune">V. Concluzie</div>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">În concluzie, prin <span class="highlight">"Ion"</span>, Liviu Rebreanu creează un personaj monumental, reprezentativ pentru o întreagă clasă socială. Este un „roman-sferă”, perfect încheiat, care demonstrează că lăcomia și ignorarea laturii spirituale duc inevitabil la prăbușire. Opera rămâne un reper estetic prin rigoarea construcției și prin forța cu care portretizează mecanismele complexe ale destinului uman.</div>', unsafe_allow_html=True)
+            st.markdown('<div class="titlu-sectiune">IV. Structură</div>', unsafe_allow_html=True)
+            st.markdown('<div class="text-eseu">Romanul are o <b>structură circulară</b> (drumul de la început și final) și este împărțit în: <b>„Glasul pământului”</b> și <b>„Glasul iubirii”</b>.</div>', unsafe_allow_html=True)
         else:
-            st.warning("🔒 Restul analizei (peste 400 de cuvinte) este vizibil doar pentru ADMIN. Introdu parola în sidebar.")
+            st.warning("🔒 Introdu codul Admin pentru eseul complet.")
 
     with t2:
-        if st.session_state.subscribed:
-            st.subheader("🏆 Provocare de Memorie")
-            q = st.selectbox("Care este simbolul circularității romanului?", ["Crucea de la drum", "Drumul care intră și iese din sat", "Nunta Anei"])
-            if st.button("Verifică"):
-                if "Drumul" in q: st.success("Corect! Ai punctat 50 puncte."); st.session_state.score += 50
-                else: st.error("Incorect!")
+        if not st.session_state.subscribed:
+            st.error("🔒 Introdu codul ADMIN pentru a juca cele 10 jocuri!")
         else:
-            st.info("Deblochează PRO pentru a accesa testele de fixare.")
+            st.header("🎮 Maraton de Pregătire (10 Nivele)")
+
+            # JOC 1: Baza Teoretică
+            with st.expander("1. Test Fulger: Teorie (An & Curent)", expanded=True):
+                c1, c2 = st.columns(2)
+                an = c1.selectbox("În ce an a apărut romanul?", ["1910", "1920", "1933"])
+                curent = c2.selectbox("Din ce curent face parte?", ["Romantism", "Realism", "Simbolism"])
+                if st.button("Verifică Nivel 1"):
+                    if an == "1920" and curent == "Realism": st.success("Corect! +10 pct"); st.session_state.score += 10
+                    else: st.error("Mai citește introducerea!")
+
+            # JOC 2: Tema
+            with st.expander("2. Identifică Tema"):
+                tema = st.radio("Care este tema principală?", ["Iubirea neîmplinită", "Lupta pentru pământ", "Războiul"])
+                if st.button("Verifică Nivel 2"):
+                    if tema == "Lupta pentru pământ": st.success("Bravo! +10 pct"); st.session_state.score += 10
+
+            # JOC 3: Elementul Realist
+            with st.expander("3. Elemente Realiste"):
+                el = st.multiselect("Alege elementele realiste:", ["Perspectiva obiectivă", "Finalul fericit", "Tehnica detaliului", "Personaje fantastice"])
+                if st.button("Verifică Nivel 3"):
+                    if set(el) == {"Perspectiva obiectivă", "Tehnica detaliului"}: st.success("Corect! +20 pct"); st.session_state.score += 20
+
+            # JOC 4: Structura
+            with st.expander("4. Arhitectura Romanului"):
+                struct = st.selectbox("Ce formă are structura romanului?", ["Liniară", "Circulară", "În spirală"])
+                if st.button("Verifică Nivel 4"):
+                    if struct == "Circulară": st.success("Perfect! +10 pct"); st.session_state.score += 10
+
+            # JOC 5: Simboluri
+            with st.expander("5. Traducătorul de Simboluri"):
+                simbol = st.radio("Ce reprezintă drumul din debutul operei?", ["O simplă cale de acces", "Metafora intrării în universul ficțiunii", "O eroare de descriere"])
+                if st.button("Verifică Nivel 5"):
+                    if "universul ficțiunii" in simbol: st.success("Așa este! +15 pct"); st.session_state.score += 15
+
+            # JOC 6: Personaje (Cine cu cine?)
+            with st.expander("6. Potrivește Cuplurile"):
+                p1 = st.selectbox("Ion se căsătorește cu:", ["Florica", "Ana", "Savista"])
+                if st.button("Verifică Nivel 6"):
+                    if p1 == "Ana": st.success("Corect (din interes)! +10 pct"); st.session_state.score += 10
+
+            # JOC 7: Conflicte
+            with st.expander("7. Conflictul Interior"):
+                conf = st.radio("Între ce forțe se dă conflictul interior al lui Ion?", ["Vasile și George", "Glasul pământului și Glasul iubirii", "Preot și Învățător"])
+                if st.button("Verifică Nivel 7"):
+                    if "Glasul" in conf: st.success("Esențial pentru eseu! +20 pct"); st.session_state.score += 20
+
+            # JOC 8: Citate
+            with st.expander("8. Completează Citatul"):
+                st.write("'Îl sărută cu patimă, ca pe o ...'")
+                cit = st.text_input("Cuvântul lipsă (fără spații):")
+                if st.button("Verifică Nivel 8"):
+                    if cit.lower() == "amantă": st.success("Excelent! +25 pct"); st.session_state.score += 25
+
+            # JOC 9: Scene cheie
+            with st.expander("9. Ordinea Cronologică"):
+                st.write("Care scenă este la începutul romanului?")
+                scena = st.radio("Alege:", ["Moartea lui Ion", "Sărutarea pământului", "Hora în sat"])
+                if st.button("Verifică Nivel 9"):
+                    if scena == "Hora în sat": st.success("Corect! +10 pct"); st.session_state.score += 10
+
+            # JOC 10: Finalul
+            with st.expander("10. Concluzia Tragediei"):
+                fin = st.radio("Cum moare Ion?", ["De bătrânețe", "Ucis de George cu sapa", "Se sinucide"])
+                if st.button("Verifică Nivel 10"):
+                    if "George" in fin: 
+                        st.balloons()
+                        st.success("FELICITĂRI! Ai terminat maratonul Ion! +30 pct")
+                        st.session_state.score += 30
