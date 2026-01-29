@@ -55,7 +55,7 @@ if st.session_state.page == "Ion":
             st.markdown('<div class="text-eseu">Această imagine este simbolul dezumanizării: Ion a înlocuit iubirea umană cu o obsesie materială personificată. Pământul încetează să mai fie un obiect, devenind o divinitate în fața căreia Ion se simte „mare și puternic”.</div>', unsafe_allow_html=True)
 
             st.markdown('<div class="titlu-sectiune">IV. Elemente de Structură și Compoziție</div>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">Perspectiva narativă obiectivă, naratorul este <b>omniscient și omniprezent</b>, adoptând o viziune „dindărăt'. Romanul se remarcă printr-o <b>structură circulară</b>, bazată pe simetrie. Imaginea drumului care intră în satul Pripas la începutul cărții și drumul care părăsește satul în final, trecând pe lângă crucea strâmbă, sugerează indiferența lumii față de dramele individuale. Compozițional, textul este împărțit în cele două volume menționate anterior, care reflectă conflictul interior dintre dorința de avere și nevoia de fericire. Conflictul exterior este dat de lupta dintre Ion și Vasile Baciu, în timp ce finalul tragic, uciderea lui Ion de către George Bulbuc, închide destinul personajului sub semnul fatalității.</div>', unsafe_allow_html=True)
+            st.markdown('<div class="text-eseu">Perspectiva narativă obiectivă, naratorul este <b>omniscient și omniprezent</b>, adoptând o viziune „dindărăt'. Romanul se remarcă printr-o <b>structură circulară</b>, bazată pe simetrie. Imaginea drumului care intră în satul Pripas la începutul cărții și drumul care părăsește satul în final, trecând pe lângă crucea strâmbă, sugerează indiferența lumii față de dramele individuale. Compozițional, textul este împărțit în cele două volume menționate anterior, care reflectă conflictul interior dintre dorința de avere și nevoia de fericire. Conflictul exterior este dat de lupta dintre Ion și Vasile Baciu, în timp ce finalul tragic, uciderea lui Ion de către George Bulbuc, închide destinul personajului sub semnul fatalității.</div>', unsafe_allow_html=True)'
             
             st.markdown('<div class="titlu-sectiune">V. Concluzie</div>', unsafe_allow_html=True)
             st.markdown('<div class="text-eseu">În concluzie, prin <span class="highlight">"Ion"</span>, Liviu Rebreanu creează un personaj monumental care eșuează din cauza propriei lăcomii. Opera rămâne o capodoperă a realismului prin rigoarea construcției și prin profunzimea analizei sociale, fiind un reper obligatoriu în literatura română care demonstrează că ignorarea laturii spirituale duce inevitabil la prăbușire.</div>', unsafe_allow_html=True)
@@ -135,6 +135,7 @@ elif st.session_state.page == "🏠 Acasă":
     st.title("George-Bac ⚡")
     if st.button("Deschide Biblioteca"):
         st.session_state.page = "📚 Biblioteca"; st.rerun()
+
 
 
 
