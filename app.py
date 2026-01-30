@@ -25,7 +25,9 @@ with st.sidebar:
     
     # Navigare automată din sidebar
     if menu == "🏠 Acasă": st.session_state.page = "🏠 Acasă"
-    if menu == "📚 Biblioteca": st.session_state.page = "📚 Biblioteca"
+    if menu == "📚 Biblioteca" and st.session_state.page not in ["Ion", "Enigma Otiliei"]: 
+        st.session_state.page = "📚 Biblioteca"
+    if menu == "💎 Upgrade PRO": st.session_state.page = "💎 Upgrade PRO"
     
     st.write("---")
     if st.text_input("🔓 Cod Admin", type="password") == "george123":
@@ -45,6 +47,7 @@ if st.session_state.page == "🏠 Acasă":
 # --- BIBLIOTECA ---
 elif st.session_state.page == "📚 Biblioteca":
     st.title("📚 Biblioteca de Opere")
+    
     col1, col2 = st.columns(2)
     with col1:
         st.info("Realism Obiectiv")
@@ -70,15 +73,17 @@ elif st.session_state.page == "Ion":
         st.markdown('<div class="text-eseu">Publicat în anul <b>1920</b>, romanul <span class="highlight">"Ion"</span> de Liviu Rebreanu reprezintă un moment de cotitură... Tehnica detaliului semnificativ și caracterul verosimil... Scena horei îi conferă textului un caracter monografic.</div>', unsafe_allow_html=True)
         
         st.markdown('<div class="titlu-sectiune">II. Tema și Viziunea</div>', unsafe_allow_html=True)
+        
         st.markdown('<div class="text-eseu">Tema centrală este <b>destinul țăranului român</b>... "Glasul pământului" și "Glasul iubirii".</div>', unsafe_allow_html=True)
 
         if not st.session_state.subscribed:
             st.warning("🔒 Secțiunile III-V sunt blocate. Introdu codul Admin!")
         else:
             st.markdown('<div class="titlu-sectiune">III. Secvențe Reprezentative</div>', unsafe_allow_html=True)
-            st.markdown('<span class="citat">„Se aplecă şi-şi lipi buzele cu voluptate de pământul ud... Îl sărută cu patimă, ca pe o <b>ibovnică</b>.”</span>', unsafe_allow_html=True)
+            st.markdown('<span class="citat">„Se aplecă şi-şi lipi buzele cu voluptate de pământul ud... Îl sărută cu patimă, ca pe o <b>ibovnică</b>. ”</span>', unsafe_allow_html=True)
             st.markdown('<div class="titlu-sectiune">IV. Structura</div>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">Structură <b>circulară</b>, bazată pe simetrie.</div>', unsafe_allow_html=True)
+            
+            st.markdown('<div class="text-eseu">Structură <b>circulară</b>, bazată pe simetrie (drumul de la început și cel de la final).</div>', unsafe_allow_html=True)
 
     with t2:
         if not st.session_state.subscribed: st.error("🔒 Cod ADMIN necesar!")
@@ -106,13 +111,15 @@ elif st.session_state.page == "Enigma Otiliei":
         st.markdown('<div class="titlu-sectiune">I. Realism Balzacian</div>', unsafe_allow_html=True)
         st.markdown('<div class="text-eseu">Publicat în <b>1938</b>, romanul ilustrează viața burgheziei bucureștene... Tehnica detaliului în descrierea străzii Antim.</div>', unsafe_allow_html=True)
         
+        
         if not st.session_state.subscribed:
             st.warning("🔒 Restul analizei este blocat!")
         else:
             st.markdown('<div class="titlu-sectiune">II. Tema și Titlul</div>', unsafe_allow_html=True)
             st.markdown('<div class="text-eseu">Tema moștenirii și a paternității. Titlul inițial: "Părinții Otiliei".</div>', unsafe_allow_html=True)
             st.markdown('<div class="titlu-sectiune">III. Caracterizarea Otiliei</div>', unsafe_allow_html=True)
-            st.markdown('<div class="text-eseu">Otilia reprezintă <b>"eternul feminin"</b>. Este caracterizată prin pluriperspectivism.</div>', unsafe_allow_html=True)
+            
+            st.markdown('<div class="text-eseu">Otilia reprezintă <b>"eternul feminin"</b>. Este caracterizată prin pluriperspectivism (tehnica oglinzilor paralele).</div>', unsafe_allow_html=True)
 
     with t2:
         if not st.session_state.subscribed: st.error("🔒 Cod ADMIN necesar!")
