@@ -22,9 +22,10 @@ with st.sidebar:
     st.title("⚡ George-Bac")
     st.metric("Puncte George ⭐", st.session_state.score)
     menu = st.radio("Meniu", ["🏠 Acasă", "📚 Biblioteca", "💎 Upgrade PRO"])
-    # Navigare Sidebar
-    if menu != "📚 Biblioteca" and st.session_state.page not in ["Ion", "Enigma Otiliei"]:
-        st.session_state.page = menu
+    
+    # Navigare automată din sidebar
+    if menu == "🏠 Acasă": st.session_state.page = "🏠 Acasă"
+    if menu == "📚 Biblioteca": st.session_state.page = "📚 Biblioteca"
     
     st.write("---")
     if st.text_input("🔓 Cod Admin", type="password") == "george123":
@@ -33,80 +34,105 @@ with st.sidebar:
 
 # --- 4. LOGICA PAGINILOR ---
 
-# --- PAGINA: ACASĂ ---
+# --- ACASĂ ---
 if st.session_state.page == "🏠 Acasă":
-    st.title("Bun venit la George-Bac ⚡")
-    st.write("Pregătire interactivă pentru examenul de Bacalaureat.")
+    st.title("George-Bac ⚡")
+    st.subheader("Platforma ta interactivă pentru nota 10 la Română")
     if st.button("Deschide Biblioteca"):
         st.session_state.page = "📚 Biblioteca"
         st.rerun()
 
-# --- PAGINA: BIBLIOTECA ---
+# --- BIBLIOTECA ---
 elif st.session_state.page == "📚 Biblioteca":
     st.title("📚 Biblioteca de Opere")
     col1, col2 = st.columns(2)
     with col1:
+        st.info("Realism Obiectiv")
         if st.button("📖 Ion - Liviu Rebreanu"):
             st.session_state.page = "Ion"
             st.rerun()
     with col2:
+        st.info("Realism Balzacian / Modernism")
         if st.button("📖 Enigma Otiliei - G. Călinescu"):
             st.session_state.page = "Enigma Otiliei"
             st.rerun()
 
-# --- PAGINA: ION ---
+# --- PAGINA ION ---
 elif st.session_state.page == "Ion":
     if st.button("⬅️ Înapoi la Bibliotecă"):
         st.session_state.page = "📚 Biblioteca"; st.rerun()
 
-    st.title("📖 Ion - Analiză & 20 Jocuri")
-    t1, t2 = st.tabs(["📄 Eseu Detaliat", "🎮 Maraton 20 Jocuri"])
+    st.title("📖 Ion - Analiză & Maraton 20 Jocuri")
+    t1, t2 = st.tabs(["📄 Eseu Detaliat", "🎮 Maraton 20 Niveluri"])
     
     with t1:
         st.markdown('<div class="titlu-sectiune">I. Introducere</div>', unsafe_allow_html=True)
-        st.markdown('<div class="text-eseu">Publicat în <b>1920</b>, romanul <b>"Ion"</b> de Liviu Rebreanu este primul roman realist-obiectiv...</div>', unsafe_allow_html=True)
-        # ... Restul eseului tău de la Ion ...
-        if st.session_state.subscribed:
+        st.markdown('<div class="text-eseu">Publicat în anul <b>1920</b>, romanul <span class="highlight">"Ion"</span> de Liviu Rebreanu reprezintă un moment de cotitură... Tehnica detaliului semnificativ și caracterul verosimil... Scena horei îi conferă textului un caracter monografic.</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="titlu-sectiune">II. Tema și Viziunea</div>', unsafe_allow_html=True)
+        st.markdown('<div class="text-eseu">Tema centrală este <b>destinul țăranului român</b>... "Glasul pământului" și "Glasul iubirii".</div>', unsafe_allow_html=True)
+
+        if not st.session_state.subscribed:
+            st.warning("🔒 Secțiunile III-V sunt blocate. Introdu codul Admin!")
+        else:
+            st.markdown('<div class="titlu-sectiune">III. Secvențe Reprezentative</div>', unsafe_allow_html=True)
             st.markdown('<span class="citat">„Se aplecă şi-şi lipi buzele cu voluptate de pământul ud... Îl sărută cu patimă, ca pe o <b>ibovnică</b>.”</span>', unsafe_allow_html=True)
+            st.markdown('<div class="titlu-sectiune">IV. Structura</div>', unsafe_allow_html=True)
+            st.markdown('<div class="text-eseu">Structură <b>circulară</b>, bazată pe simetrie.</div>', unsafe_allow_html=True)
 
     with t2:
         if not st.session_state.subscribed: st.error("🔒 Cod ADMIN necesar!")
         else:
-            # Jocurile 1-20 de la Ion (Compactate pentru cod)
-            with st.expander("Nivelele 1-10: Acțiune și Simboluri"):
-                if st.text_input("Citat (Nivel 8): Ca pe o...", key="ion8").lower().strip() in ["ibovnică", "ibovnica"]: st.success("Bravo!")
-            with st.expander("Nivelele 11-20: Teoria Personajului"):
-                if st.radio("Statut social Ion?", ["Bogat", "Sărăntoc"]) == "Sărăntoc": st.success("+10 pct")
+            st.header("🎮 Maraton Ion (20 Nivele)")
+            c1, c2 = st.columns(2)
+            with c1:
+                with st.expander("1-10: Acțiune"):
+                    if st.selectbox("An?", ["1920", "1930"], key="i1") == "1920": st.success("+10")
+                    if st.text_input("Citat (Nivel 8): Ca pe o...", key="i8").lower().strip() in ["ibovnică", "ibovnica"]: st.success("+25")
+            with c2:
+                with st.expander("11-20: Teorie & Personaj"):
+                    if st.radio("Statut social Ion?", ["Bogat", "Sărăntoc"], key="i11") == "Sărăntoc": st.success("+10")
+                    if st.selectbox("Statut Moral?", ["Degradare", "Ascensiune"], key="i12") == "Degradare": st.success("+10")
 
-# --- PAGINA: ENIGMA OTILIEI ---
+# --- PAGINA ENIGMA OTILIEI ---
 elif st.session_state.page == "Enigma Otiliei":
     if st.button("⬅️ Înapoi la Bibliotecă"):
         st.session_state.page = "📚 Biblioteca"; st.rerun()
 
-    st.title("📖 Enigma Otiliei - Analiză & 30 Jocuri")
-    t1, t2 = st.tabs(["📄 Eseu Critic", "🎮 Maraton 30 Jocuri"])
+    st.title("📖 Enigma Otiliei - Analiză & Maraton 30 Jocuri")
+    t1, t2 = st.tabs(["📄 Eseu Critic", "🎮 Maraton 30 Niveluri"])
 
     with t1:
         st.markdown('<div class="titlu-sectiune">I. Realism Balzacian</div>', unsafe_allow_html=True)
-        st.markdown('<div class="text-eseu">Publicat în 1938, romanul ilustrează viața burgheziei...</div>', unsafe_allow_html=True)
-        # ... Restul eseului tău de la Enigma ...
+        st.markdown('<div class="text-eseu">Publicat în <b>1938</b>, romanul ilustrează viața burgheziei bucureștene... Tehnica detaliului în descrierea străzii Antim.</div>', unsafe_allow_html=True)
+        
+        if not st.session_state.subscribed:
+            st.warning("🔒 Restul analizei este blocat!")
+        else:
+            st.markdown('<div class="titlu-sectiune">II. Tema și Titlul</div>', unsafe_allow_html=True)
+            st.markdown('<div class="text-eseu">Tema moștenirii și a paternității. Titlul inițial: "Părinții Otiliei".</div>', unsafe_allow_html=True)
+            st.markdown('<div class="titlu-sectiune">III. Caracterizarea Otiliei</div>', unsafe_allow_html=True)
+            st.markdown('<div class="text-eseu">Otilia reprezintă <b>"eternul feminin"</b>. Este caracterizată prin pluriperspectivism.</div>', unsafe_allow_html=True)
 
     with t2:
         if not st.session_state.subscribed: st.error("🔒 Cod ADMIN necesar!")
         else:
+            st.header("🏆 Maraton Enigma (30 Niveluri)")
             c1, c2, c3 = st.columns(3)
             with c1:
-                with st.expander("1-10: Bazele"):
-                    if st.selectbox("An?", ["1933", "1938"], key="en1") == "1938": st.success("+5")
+                with st.expander("1-10: Bazele Balzaciene"):
+                    if st.selectbox("An apariție?", ["1938", "1920"], key="e1") == "1938": st.success("+5")
+                    if "Antim" in st.text_input("Strada?", key="e6"): st.success("+10")
             with c2:
-                with st.expander("11-20: Modernism"):
-                    if st.checkbox("Pluriperspectivism", key="en11"): st.success("+10")
+                with st.expander("11-20: Modernism & Conflicte"):
+                    if st.checkbox("Pluriperspectivism", key="e12"): st.success("+10")
+                    if "Stănică" in st.text_input("Cine fură banii?", key="e18"): st.success("+15")
             with c3:
-                with st.expander("21-30: Personaje"):
-                    if st.radio("Cine e avarul?", ["Felix", "Costache"], key="en21") == "Costache": st.success("+10")
-                    if st.button("Finalizează Enigma"): st.balloons()
+                with st.expander("21-30: Otilia & Final"):
+                    if "Orfană" in st.radio("Statut Otilia?", ["Bogată", "Orfană"], key="e21"): st.success("+5")
+                    if st.button("Finalizează Maratonul"): st.balloons()
 
-# --- PAGINA: UPGRADE ---
+# --- UPGRADE PRO ---
 elif st.session_state.page == "💎 Upgrade PRO":
-    st.title("💎 George-Bac PRO")
-    st.write("Introdu codul de acces pentru a debloca toate cele 50+ de jocuri și eseurile complete.")
+    st.title("💎 Upgrade la Premium")
+    st.write("Introdu codul primit de la profesor pentru a debloca tot conținutul.")
